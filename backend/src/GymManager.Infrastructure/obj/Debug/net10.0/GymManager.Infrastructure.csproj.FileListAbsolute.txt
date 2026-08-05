@@ -1,0 +1,16 @@
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/bin/Debug/net10.0/GymManager.Infrastructure.deps.json
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/bin/Debug/net10.0/GymManager.Infrastructure.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/bin/Debug/net10.0/GymManager.Infrastructure.pdb
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/bin/Debug/net10.0/GymManager.Application.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/bin/Debug/net10.0/GymManager.Application.pdb
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/obj/Debug/net10.0/GymManager.Infrastructure.csproj.AssemblyReference.cache
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/obj/Debug/net10.0/GymManager.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/obj/Debug/net10.0/GymManager.Infrastructure.AssemblyInfoInputs.cache
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/obj/Debug/net10.0/GymManager.Infrastructure.AssemblyInfo.cs
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/obj/Debug/net10.0/GymManager.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/obj/Debug/net10.0/GymManager.Infrastructure.sourcelink.json
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/obj/Debug/net10.0/GymManag.A4EE15D7.Up2Date
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/obj/Debug/net10.0/GymManager.Infrastructure.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/obj/Debug/net10.0/refint/GymManager.Infrastructure.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/obj/Debug/net10.0/GymManager.Infrastructure.pdb
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/obj/Debug/net10.0/ref/GymManager.Infrastructure.dll

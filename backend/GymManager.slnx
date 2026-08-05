@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GymManager.Api/GymManager.Api.csproj" />
+    <Project Path="src/GymManager.Application/GymManager.Application.csproj" />
+    <Project Path="src/GymManager.Infrastructure/GymManager.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/GymManager.Tests/GymManager.Tests.csproj" />
+  </Folder>
+</Solution>

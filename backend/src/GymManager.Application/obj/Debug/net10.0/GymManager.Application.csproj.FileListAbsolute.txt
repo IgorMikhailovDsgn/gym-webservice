@@ -1,0 +1,12 @@
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Application/bin/Debug/net10.0/GymManager.Application.deps.json
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Application/bin/Debug/net10.0/GymManager.Application.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Application/bin/Debug/net10.0/GymManager.Application.pdb
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Application/obj/Debug/net10.0/GymManager.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Application/obj/Debug/net10.0/GymManager.Application.AssemblyInfoInputs.cache
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Application/obj/Debug/net10.0/GymManager.Application.AssemblyInfo.cs
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Application/obj/Debug/net10.0/GymManager.Application.csproj.CoreCompileInputs.cache
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Application/obj/Debug/net10.0/GymManager.Application.sourcelink.json
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Application/obj/Debug/net10.0/GymManager.Application.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Application/obj/Debug/net10.0/refint/GymManager.Application.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Application/obj/Debug/net10.0/GymManager.Application.pdb
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Application/obj/Debug/net10.0/ref/GymManager.Application.dll
