@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "0cCW39a0vDU=",
+  "dgSpecHash": "XuQL92Ghyfc=",
   "success": true,
   "projectFilePath": "/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Application/GymManager.Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/igor/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.10/microsoft.extensions.dependencyinjection.abstractions.10.0.10.nupkg.sha512"
+  ],
   "logs": []
 }

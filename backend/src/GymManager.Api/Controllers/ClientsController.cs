@@ -1,4 +1,4 @@
-using GymManager.Application.Abstractions;
+using GymManager.Application.Clients;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymManager.Api.Controllers;
@@ -7,14 +7,16 @@ namespace GymManager.Api.Controllers;
 [Route("api/clients")]
 public sealed class ClientsController : ControllerBase
 {
-    private readonly IClientRepository _clients;
+    private readonly IClientService _clients;
 
-    public ClientsController(IClientRepository clients) => _clients = clients;
+    public ClientsController(IClientService clients) => _clients = clients;
 
     [HttpGet]
-    public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] ClientQuery query,
+        CancellationToken cancellationToken)
     {
-        var clients = await _clients.GetAllAsync(cancellationToken);
-        return Ok(clients);
+        var result = await _clients.GetPagedAsync(query, cancellationToken);
+        return Ok(result);
     }
 }

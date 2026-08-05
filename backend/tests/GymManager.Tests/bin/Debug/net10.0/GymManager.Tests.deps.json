@@ -492,6 +492,9 @@
         }
       },
       "GymManager.Application/1.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.10"
+        },
         "runtime": {
           "GymManager.Application.dll": {
             "assemblyVersion": "1.0.0.0",
