@@ -1,6 +1,7 @@
 using FluentValidation;
 using GymManager.Application.Clients;
 using GymManager.Application.Tickets;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymManager.Api.Controllers;
@@ -8,6 +9,7 @@ namespace GymManager.Api.Controllers;
 /// <summary>Клиенты фитнес-центра.</summary>
 [ApiController]
 [Route("api/clients")]
+[Authorize]
 public sealed class ClientsController : ControllerBase
 {
     private readonly IClientService _clients;
@@ -27,7 +29,7 @@ public sealed class ClientsController : ControllerBase
         _updateValidator = updateValidator;
     }
 
-    /// Список клиентов с поиском, фильтром по статусу и пагинацией
+    /// <summary>Список клиентов с поиском, фильтром по статусу и пагинацией.</summary>
     [HttpGet]
     public async Task<IActionResult> GetPaged(
         [FromQuery] ClientQuery query,
@@ -37,7 +39,7 @@ public sealed class ClientsController : ControllerBase
         return Ok(result);
     }
 
-    /// Карточка клиента
+    /// <summary>Карточка клиента.</summary>
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
     {
@@ -47,7 +49,7 @@ public sealed class ClientsController : ControllerBase
         return Ok(client);
     }
 
-    /// История абонементов клиента.
+    /// <summary>История абонементов клиента.</summary>
     [HttpGet("{id:guid}/tickets")]
     public async Task<IActionResult> GetTickets(Guid id, CancellationToken cancellationToken)
     {
@@ -55,7 +57,7 @@ public sealed class ClientsController : ControllerBase
         return Ok(tickets);
     }
 
-    /// Создание клиента 
+    /// <summary>Создание клиента.</summary>
     [HttpPost]
     public async Task<IActionResult> Create(
         [FromBody] CreateClientCommand command,
@@ -70,7 +72,7 @@ public sealed class ClientsController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = client.Id }, client);
     }
 
-    // Обновление клиента   
+    /// <summary>Редактирование клиента.</summary>
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> Update(
         Guid id,

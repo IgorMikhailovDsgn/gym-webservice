@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GymManager.Api</name>
+    </assembly>
+    <members>
+        <member name="T:GymManager.Api.Controllers.AuthController">
+            <summary>Аутентификация сотрудников.</summary>
+        </member>
+        <member name="M:GymManager.Api.Controllers.AuthController.Login(GymManager.Application.Auth.LoginCommand,System.Threading.CancellationToken)">
+            <summary>Вход в систему. Возвращает JWT для последующих запросов.</summary>
+            <remarks>
+            Полученный токен передаётся в заголовке: Authorization: Bearer {token}
+            </remarks>
+        </member>
+        <member name="T:GymManager.Api.Controllers.ClientsController">
+            <summary>Клиенты фитнес-центра.</summary>
+        </member>
+        <member name="M:GymManager.Api.Controllers.ClientsController.GetPaged(GymManager.Application.Clients.ClientQuery,System.Threading.CancellationToken)">
+            <summary>Список клиентов с поиском, фильтром по статусу и пагинацией.</summary>
+        </member>
+        <member name="M:GymManager.Api.Controllers.ClientsController.GetById(System.Guid,System.Threading.CancellationToken)">
+            <summary>Карточка клиента.</summary>
+        </member>
+        <member name="M:GymManager.Api.Controllers.ClientsController.GetTickets(System.Guid,System.Threading.CancellationToken)">
+            <summary>История абонементов клиента.</summary>
+        </member>
+        <member name="M:GymManager.Api.Controllers.ClientsController.Create(GymManager.Application.Clients.CreateClientCommand,System.Threading.CancellationToken)">
+            <summary>Создание клиента.</summary>
+        </member>
+        <member name="M:GymManager.Api.Controllers.ClientsController.Update(System.Guid,GymManager.Application.Clients.UpdateClientCommand,System.Threading.CancellationToken)">
+            <summary>Редактирование клиента.</summary>
+        </member>
+        <member name="T:GymManager.Api.Controllers.TicketsController">
+            <summary>Абонементы.</summary>
+        </member>
+        <member name="M:GymManager.Api.Controllers.TicketsController.Create(GymManager.Application.Tickets.CreateTicketCommand,System.Threading.CancellationToken)">
+            <summary>Оформить абонемент.</summary>
+            <remarks>
+            Срок и лимит посещений копируются из шаблона ticket_types в момент
+            оформления. Это снимок, а не ссылка: правка справочника не должна
+            задним числом менять условия уже проданных абонементов.
+            </remarks>
+        </member>
+        <member name="M:GymManager.Api.Controllers.TicketsController.Extend(System.Guid,GymManager.Application.Tickets.ExtendTicketCommand,System.Threading.CancellationToken)">
+            <summary>Продлить абонемент на указанное число дней.</summary>
+            <remarks>
+            Просроченный абонемент продлить можно — клиент вернулся.
+            Отменённый нельзя: отмена была решением, обходить его продлением
+            неправильно.
+            </remarks>
+        </member>
+        <member name="M:GymManager.Api.Controllers.TicketsController.Search(GymManager.Application.Tickets.TicketQuery,System.Threading.CancellationToken)">
+            <summary>Список абонементов с фильтрами.</summary>
+        </member>
+        <member name="T:GymManager.Api.Controllers.VisitsController">
+            <summary>Посещения тренировок.</summary>
+        </member>
+        <member name="M:GymManager.Api.Controllers.VisitsController.Register(GymManager.Application.Visits.RegisterVisitCommand,System.Threading.CancellationToken)">
+             <summary>Зафиксировать посещение по абонементу.</summary>
+             <remarks>
+             Проверяются четыре бизнес-правила: абонемент не отменён, срок начался
+             и не истёк, лимит посещений не исчерпан. Отказ возвращается как 409
+             с машиночитаемым кодом причины в поле code.
+            
+             Операция выполняется в транзакции с блокировкой строки абонемента,
+             чтобы два одновременных запроса не списали больше посещений,
+             чем осталось.
+             </remarks>
+        </member>
+        <member name="M:GymManager.Api.Extensions.ClaimsPrincipalExtensions.GetUserId(System.Security.Claims.ClaimsPrincipal)">
+            Достаёт идентификатор пользователя из claim Sub.
+            ASP.NET Core по умолчанию переименовывает Sub в ClaimTypes.NameIdentifier,
+            поэтому проверяем оба варианта.
+        </member>
+        <member name="T:GymManager.Api.Middleware.ExceptionHandlingMiddleware">
+             <summary>
+             Единая точка превращения исключений в HTTP-ответы.
+            
+             Обработка запроса в ASP.NET Core устроена как конвейер: каждый компонент
+             получает запрос, что-то делает, передаёт дальше и получает управление
+             обратно на пути ответа. Всё, что происходит глубже — контроллер, сервис,
+             репозиторий — оказывается внутри нашего try, поэтому один catch здесь
+             заменяет проверки во всех контроллерах.
+            
+             Формат ответа — ProblemDetails (RFC 7807), стандартный для .NET.
+             </summary>
+        </member>
+        <member name="T:GymManager.Api.Validators.CreateClientCommandValidator">
+            <summary>
+            Проверка формата входных данных. Живёт в Api, а не в Application,
+            потому что относится к границе системы: данные приходят извне.
+            Бизнес-правила проверяются в сервисах.
+            </summary>
+        </member>
+        <member name="T:Program">
+            <summary>
+            Auto-generated public partial Program class for top-level statement apps.
+            </summary>
+        </member>
+    </members>
+</doc>

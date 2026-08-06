@@ -1,6 +1,7 @@
 using GymManager.Application.Clients;
 using GymManager.Application.Tickets;
 using GymManager.Application.Visits;
+using GymManager.Application.Auth;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GymManager.Application;
@@ -17,6 +18,7 @@ public static class DependencyInjection
         services.AddScoped<IClientService, ClientService>();
         services.AddScoped<ITicketService, TicketService>();
         services.AddScoped<IVisitService, VisitService>();
+        services.AddScoped<IAuthService, AuthService>();
 
         return services;
     }

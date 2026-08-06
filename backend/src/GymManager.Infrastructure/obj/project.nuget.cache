@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "UnMfVkxZW04=",
+  "dgSpecHash": "vsYYrWJoC60=",
   "success": true,
   "projectFilePath": "/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Infrastructure/GymManager.Infrastructure.csproj",
   "expectedPackageFiles": [
+    "/Users/igor/.nuget/packages/bcrypt.net-next/4.2.0/bcrypt.net-next.4.2.0.nupkg.sha512",
+    "/Users/igor/.nuget/packages/microsoft.bcl.cryptography/10.0.2/microsoft.bcl.cryptography.10.0.2.nupkg.sha512",
     "/Users/igor/.nuget/packages/microsoft.entityframeworkcore/10.0.4/microsoft.entityframeworkcore.10.0.4.nupkg.sha512",
     "/Users/igor/.nuget/packages/microsoft.entityframeworkcore.abstractions/10.0.4/microsoft.entityframeworkcore.abstractions.10.0.4.nupkg.sha512",
     "/Users/igor/.nuget/packages/microsoft.entityframeworkcore.analyzers/10.0.4/microsoft.entityframeworkcore.analyzers.10.0.4.nupkg.sha512",
@@ -17,8 +19,13 @@
     "/Users/igor/.nuget/packages/microsoft.extensions.logging.abstractions/10.0.4/microsoft.extensions.logging.abstractions.10.0.4.nupkg.sha512",
     "/Users/igor/.nuget/packages/microsoft.extensions.options/10.0.4/microsoft.extensions.options.10.0.4.nupkg.sha512",
     "/Users/igor/.nuget/packages/microsoft.extensions.primitives/10.0.10/microsoft.extensions.primitives.10.0.10.nupkg.sha512",
+    "/Users/igor/.nuget/packages/microsoft.identitymodel.abstractions/8.22.0/microsoft.identitymodel.abstractions.8.22.0.nupkg.sha512",
+    "/Users/igor/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.22.0/microsoft.identitymodel.jsonwebtokens.8.22.0.nupkg.sha512",
+    "/Users/igor/.nuget/packages/microsoft.identitymodel.logging/8.22.0/microsoft.identitymodel.logging.8.22.0.nupkg.sha512",
+    "/Users/igor/.nuget/packages/microsoft.identitymodel.tokens/8.22.0/microsoft.identitymodel.tokens.8.22.0.nupkg.sha512",
     "/Users/igor/.nuget/packages/npgsql/10.0.3/npgsql.10.0.3.nupkg.sha512",
-    "/Users/igor/.nuget/packages/npgsql.entityframeworkcore.postgresql/10.0.3/npgsql.entityframeworkcore.postgresql.10.0.3.nupkg.sha512"
+    "/Users/igor/.nuget/packages/npgsql.entityframeworkcore.postgresql/10.0.3/npgsql.entityframeworkcore.postgresql.10.0.3.nupkg.sha512",
+    "/Users/igor/.nuget/packages/system.identitymodel.tokens.jwt/8.22.0/system.identitymodel.tokens.jwt.8.22.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -3,8 +3,7 @@ namespace GymManager.Application.Visits;
 /// Команда на фиксацию посещения.
 public sealed record RegisterVisitCommand(
     Guid TicketId,
-    Guid? TrainerId,
-    Guid UserId);
+    Guid? TrainerId);
 
 /// Зафиксированное посещение.
 public sealed record VisitModel(

@@ -1,5 +1,6 @@
 using GymManager.Application.Tickets;
 using GymManager.Application.Visits;
+using GymManager.Application.Common;
 
 namespace GymManager.Application.Abstractions;
 
@@ -16,6 +17,7 @@ public interface ITicketRepository
         Guid ticketId, Guid? trainerId, Guid userId, CancellationToken cancellationToken);
 
     Task<TicketTypeModel?> GetTypeAsync(Guid ticketTypeId, CancellationToken cancellationToken);
+    Task<PagedResult<TicketModel>> SearchAsync(TicketQuery query, CancellationToken cancellationToken);
 
     Task<TicketModel> AddAsync(
     Guid clientId, Guid ticketTypeId, DateOnly dateStart, DateOnly dateEnd,

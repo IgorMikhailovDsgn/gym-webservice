@@ -18,7 +18,6 @@
 /Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/FluentValidation.dll
 /Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/FluentValidation.DependencyInjectionExtensions.dll
 /Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Humanizer.dll
-/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Microsoft.AspNetCore.OpenApi.dll
 /Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Microsoft.Build.Framework.dll
 /Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Microsoft.CodeAnalysis.dll
 /Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Microsoft.CodeAnalysis.CSharp.dll
@@ -127,3 +126,18 @@
 /Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/obj/Debug/net10.0/GymManager.Api.pdb
 /Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/obj/Debug/net10.0/GymManager.Api.genruntimeconfig.cache
 /Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/obj/Debug/net10.0/ref/GymManager.Api.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/BCrypt-Net-Next.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Microsoft.Bcl.Cryptography.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Microsoft.IdentityModel.Logging.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Microsoft.IdentityModel.Protocols.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Microsoft.IdentityModel.Tokens.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/GymManager.Api.xml
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/bin/Debug/net10.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/obj/Debug/net10.0/GymManager.Api.xml

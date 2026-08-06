@@ -1,6 +1,7 @@
 using GymManager.Application.Abstractions;
 using GymManager.Infrastructure.Persistence;
 using GymManager.Infrastructure.Repositories;
+using GymManager.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,9 @@ public static class DependencyInjection
         services.AddScoped<IClientRepository, ClientRepository>();
         services.AddScoped<ITicketRepository, TicketRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddSingleton<IPasswordHasher, BCryptPasswordHasher>();
+        services.AddSingleton<ITokenGenerator, JwtTokenGenerator>();
 
         return services;
     }

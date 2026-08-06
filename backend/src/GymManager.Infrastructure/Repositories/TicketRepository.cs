@@ -4,6 +4,7 @@ using GymManager.Application.Visits;
 using GymManager.Infrastructure.Entities;
 using GymManager.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using GymManager.Application.Common;
 
 namespace GymManager.Infrastructure.Repositories;
 
@@ -164,4 +165,36 @@ public sealed class TicketRepository : ITicketRepository
                 t.DateStart!.Value, t.DateEnd!.Value,
                 t.VisitsLimit, t.VisitsUsed!.Value, t.VisitsRemaining, t.Status!))
             .FirstAsync(cancellationToken);
+
+    public async Task<PagedResult<TicketModel>> SearchAsync(
+    TicketQuery query,
+    CancellationToken cancellationToken)
+{
+    var tickets = _db.VTickets.AsNoTracking();
+
+    if (query.ClientId is not null)
+        tickets = tickets.Where(t => t.ClientId == query.ClientId);
+
+    if (query.Status is not null)
+        tickets = tickets.Where(t => t.Status == query.Status);
+
+    if (query.ActiveOn is not null)
+        tickets = tickets.Where(t =>
+            t.DateStart <= query.ActiveOn && t.DateEnd >= query.ActiveOn);
+
+    var totalCount = await tickets.CountAsync(cancellationToken);
+
+    var items = await tickets
+        .OrderByDescending(t => t.DateStart)
+        .ThenBy(t => t.Id)
+        .Skip((query.Page - 1) * query.PageSize)
+        .Take(query.PageSize)
+        .Select(t => new TicketModel(
+            t.Id!.Value, t.ClientId!.Value, t.TicketTypeName!,
+            t.DateStart!.Value, t.DateEnd!.Value,
+            t.VisitsLimit, t.VisitsUsed!.Value, t.VisitsRemaining, t.Status!))
+        .ToListAsync(cancellationToken);
+
+    return new PagedResult<TicketModel>(items, query.Page, query.PageSize, totalCount);
+}
 }

@@ -114,3 +114,10 @@
 /Users/igor/Desktop/Gym-WebService/backend/tests/GymManager.Tests/obj/Debug/net10.0/GymManager.Tests.pdb
 /Users/igor/Desktop/Gym-WebService/backend/tests/GymManager.Tests/obj/Debug/net10.0/GymManager.Tests.genruntimeconfig.cache
 /Users/igor/Desktop/Gym-WebService/backend/tests/GymManager.Tests/obj/Debug/net10.0/ref/GymManager.Tests.dll
+/Users/igor/Desktop/Gym-WebService/backend/tests/GymManager.Tests/bin/Debug/net10.0/BCrypt-Net-Next.dll
+/Users/igor/Desktop/Gym-WebService/backend/tests/GymManager.Tests/bin/Debug/net10.0/Microsoft.Bcl.Cryptography.dll
+/Users/igor/Desktop/Gym-WebService/backend/tests/GymManager.Tests/bin/Debug/net10.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/igor/Desktop/Gym-WebService/backend/tests/GymManager.Tests/bin/Debug/net10.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/igor/Desktop/Gym-WebService/backend/tests/GymManager.Tests/bin/Debug/net10.0/Microsoft.IdentityModel.Logging.dll
+/Users/igor/Desktop/Gym-WebService/backend/tests/GymManager.Tests/bin/Debug/net10.0/Microsoft.IdentityModel.Tokens.dll
+/Users/igor/Desktop/Gym-WebService/backend/tests/GymManager.Tests/bin/Debug/net10.0/System.IdentityModel.Tokens.Jwt.dll

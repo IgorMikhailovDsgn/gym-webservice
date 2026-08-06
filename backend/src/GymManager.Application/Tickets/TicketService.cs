@@ -8,6 +8,7 @@ public interface ITicketService
     Task<IReadOnlyList<TicketModel>> GetByClientAsync(Guid clientId, CancellationToken cancellationToken);
     Task<TicketModel> CreateAsync(CreateTicketCommand command, CancellationToken cancellationToken);
     Task<TicketModel> ExtendAsync(Guid ticketId, ExtendTicketCommand command, CancellationToken cancellationToken);
+    Task<PagedResult<TicketModel>> SearchAsync(TicketQuery query, CancellationToken cancellationToken);
 }
 
 public sealed class TicketService : ITicketService
@@ -90,4 +91,19 @@ public sealed class TicketService : ITicketService
 
         return await _tickets.ExtendAsync(ticketId, command.Days, cancellationToken);
     }
+
+    public Task<PagedResult<TicketModel>> SearchAsync(
+    TicketQuery query,
+    CancellationToken cancellationToken)
+    {
+        var normalized = query with
+        {
+            Page = query.Page < 1 ? 1 : query.Page,
+            PageSize = Math.Clamp(query.PageSize, 1, 100),
+            Status = string.IsNullOrWhiteSpace(query.Status) ? null : query.Status.Trim().ToLowerInvariant()
+        };
+
+        return _tickets.SearchAsync(normalized, cancellationToken);
+    }
+    
 }

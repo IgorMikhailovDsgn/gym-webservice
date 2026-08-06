@@ -5,7 +5,8 @@ namespace GymManager.Application.Visits;
 
 public interface IVisitService
 {
-    Task<VisitModel> RegisterAsync(RegisterVisitCommand command, CancellationToken cancellationToken);
+    Task<VisitModel> RegisterAsync(
+    RegisterVisitCommand command, Guid userId, CancellationToken cancellationToken);
 }
 
 public sealed class VisitService : IVisitService
@@ -20,15 +21,12 @@ public sealed class VisitService : IVisitService
     }
 
     public Task<VisitModel> RegisterAsync(
-        RegisterVisitCommand command,
-        CancellationToken cancellationToken)
+    RegisterVisitCommand command,
+    Guid userId,
+    CancellationToken cancellationToken)
     {
         return _unitOfWork.ExecuteInTransactionAsync(async ct =>
         {
-            // Блокировка строки: до конца транзакции второй запрос по этому
-            // же абонементу будет ждать здесь. Без неё два быстрых клика
-            // прошли бы проверку лимита одновременно и списали два посещения
-            // при одном оставшемся.
             var ticket = await _tickets.GetForUpdateAsync(command.TicketId, ct);
 
             if (ticket is null)
@@ -36,8 +34,7 @@ public sealed class VisitService : IVisitService
 
             EnsureCanRegisterVisit(ticket);
 
-            return await _tickets.AddVisitAsync(
-                ticket.Id, command.TrainerId, command.UserId, ct);
+            return await _tickets.AddVisitAsync(ticket.Id, command.TrainerId, userId, ct);
         }, cancellationToken);
     }
 
