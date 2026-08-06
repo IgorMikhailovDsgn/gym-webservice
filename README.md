@@ -4,7 +4,8 @@
 и посещений.
 
 Доступ https://gymservice.cfi-messenger.ru/
-Логин admin, пароль admin123
+Логин: admin
+Пароль: admin123
 
 Стек:
 - ASP.NET Core Web API 10.0
