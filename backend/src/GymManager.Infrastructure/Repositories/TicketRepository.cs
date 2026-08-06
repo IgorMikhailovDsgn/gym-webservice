@@ -1,5 +1,7 @@
 using GymManager.Application.Abstractions;
 using GymManager.Application.Tickets;
+using GymManager.Application.Visits;
+using GymManager.Infrastructure.Entities;
 using GymManager.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,5 +43,65 @@ public sealed class TicketRepository : ITicketRepository
                 t.VisitsRemaining,
                 t.Status!))
             .ToListAsync(cancellationToken);
+    }
+
+    public async Task<TicketState?> GetForUpdateAsync(
+    Guid ticketId,
+    CancellationToken cancellationToken)
+    {
+        // FOR UPDATE блокирует строку до конца транзакции: второй запрос по
+        // этому же абонементу будет ждать здесь, а не читать устаревшие данные.
+        // Именно это исключает гонку «прочитал — проверил — записал».
+        //
+        // Параметр передан через {0}, а не конкатенацией: FromSqlRaw превращает
+        // его в параметр запроса, что исключает SQL-инъекцию.
+        var entity = await _db.Tickets
+            .FromSqlRaw("SELECT * FROM tickets WHERE id = {0} FOR UPDATE", ticketId)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (entity is null)
+            return null;
+
+        return new TicketState(
+            entity.Id,
+            entity.ClientId,
+            entity.DateStart,
+            entity.DateEnd,
+            entity.VisitsLimit,
+            entity.VisitsUsed,
+            entity.IsCancelled);
+    }
+
+    public async Task<VisitModel> AddVisitAsync(
+        Guid ticketId,
+        Guid? trainerId,
+        Guid userId,
+        CancellationToken cancellationToken)
+    {
+        // Сущность уже отслеживается после FromSqlRaw выше, поэтому
+        // изменение счётчика попадёт в UPDATE автоматически.
+        var ticket = await _db.Tickets.FirstAsync(t => t.Id == ticketId, cancellationToken);
+
+        var visit = new Visit
+        {
+            TicketId = ticketId,
+            TrainerId = trainerId,
+            UserId = userId
+        };
+
+        _db.Visits.Add(visit);
+        ticket.VisitsUsed += 1;
+
+        // Один SaveChanges на обе операции: INSERT в visits и UPDATE счётчика
+        // уйдут вместе, внутри транзакции, открытой в UnitOfWork.
+        await _db.SaveChangesAsync(cancellationToken);
+
+        return new VisitModel(
+            visit.Id,
+            visit.TicketId,
+            visit.VisitedAt,
+            visit.TrainerId,
+            visit.UserId,
+            ticket.VisitsLimit is null ? null : ticket.VisitsLimit - ticket.VisitsUsed);
     }
 }

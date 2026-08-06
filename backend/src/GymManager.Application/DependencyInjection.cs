@@ -1,13 +1,12 @@
 using GymManager.Application.Clients;
 using GymManager.Application.Tickets;
+using GymManager.Application.Visits;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GymManager.Application;
 
-/// <summary>
 /// Каждый слой сам объявляет, что регистрировать. Program.cs вызывает один
 /// метод вместо того, чтобы знать про внутренние классы слоя.
-/// </summary>
 public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
@@ -17,6 +16,7 @@ public static class DependencyInjection
         // уничтоженному объекту (captive dependency).
         services.AddScoped<IClientService, ClientService>();
         services.AddScoped<ITicketService, TicketService>();
+        services.AddScoped<IVisitService, VisitService>();
 
         return services;
     }

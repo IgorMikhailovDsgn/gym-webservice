@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GymManager.Api.Controllers;
 
-/// Клиенты фитнес-центра
+/// <summary>Клиенты фитнес-центра.</summary>
 [ApiController]
 [Route("api/clients")]
 public sealed class ClientsController : ControllerBase

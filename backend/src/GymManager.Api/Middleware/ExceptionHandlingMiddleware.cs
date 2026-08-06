@@ -65,6 +65,27 @@ public sealed class ExceptionHandlingMiddleware
             await WriteProblemAsync(context, StatusCodes.Status404NotFound,
                 "Не найдено", ex.Message);
         }
+        catch (BusinessRuleException ex)
+        {
+            if (context.Response.HasStarted)
+                return;
+
+            context.Response.StatusCode = StatusCodes.Status409Conflict;
+            context.Response.ContentType = "application/problem+json";
+
+            var problem = new ProblemDetails
+            {
+                Status = StatusCodes.Status409Conflict,
+                Title = "Операция невозможна",
+                Detail = ex.Message,
+                Instance = context.Request.Path
+            };
+
+            // Машиночитаемый код рядом с человеческим текстом.
+            problem.Extensions["code"] = ex.Code;
+
+            await context.Response.WriteAsJsonAsync(problem);
+        }
         catch (Exception ex)
         {
             // Подробности — в лог, наружу обезличенный текст: сообщение
