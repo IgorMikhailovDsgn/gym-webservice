@@ -13,10 +13,19 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        var connectionString = configuration.GetConnectionString("GymDb")
+            ?? throw new InvalidOperationException(
+                "Строка подключения 'GymDb' не задана. " +
+                "Проверьте секцию ConnectionStrings в appsettings.json.");
+
+        // AddDbContext регистрирует контекст как Scoped: один экземпляр на
+        // HTTP-запрос. DbContext не потокобезопасен и хранит состояние
+        // отслеживания изменений, поэтому дольше жить не должен.
         services.AddDbContext<GymDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("GymDb")));
+            options.UseNpgsql(connectionString));
 
         services.AddScoped<IClientRepository, ClientRepository>();
+        services.AddScoped<ITicketRepository, TicketRepository>();
 
         return services;
     }

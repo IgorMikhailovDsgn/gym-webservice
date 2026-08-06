@@ -1,16 +1,33 @@
+using FluentValidation;
 using GymManager.Application.Clients;
+using GymManager.Application.Tickets;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymManager.Api.Controllers;
 
+/// Клиенты фитнес-центра
 [ApiController]
 [Route("api/clients")]
 public sealed class ClientsController : ControllerBase
 {
     private readonly IClientService _clients;
+    private readonly ITicketService _tickets;
+    private readonly IValidator<CreateClientCommand> _createValidator;
+    private readonly IValidator<UpdateClientCommand> _updateValidator;
 
-    public ClientsController(IClientService clients) => _clients = clients;
+    public ClientsController(
+        IClientService clients,
+        ITicketService tickets,
+        IValidator<CreateClientCommand> createValidator,
+        IValidator<UpdateClientCommand> updateValidator)
+    {
+        _clients = clients;
+        _tickets = tickets;
+        _createValidator = createValidator;
+        _updateValidator = updateValidator;
+    }
 
+    /// Список клиентов с поиском, фильтром по статусу и пагинацией
     [HttpGet]
     public async Task<IActionResult> GetPaged(
         [FromQuery] ClientQuery query,
@@ -18,5 +35,52 @@ public sealed class ClientsController : ControllerBase
     {
         var result = await _clients.GetPagedAsync(query, cancellationToken);
         return Ok(result);
+    }
+
+    /// Карточка клиента
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
+    {
+        // Если клиента нет, сервис бросит NotFoundException, а middleware
+        // превратит её в 404. Контроллер об этом не думает.
+        var client = await _clients.GetByIdAsync(id, cancellationToken);
+        return Ok(client);
+    }
+
+    /// История абонементов клиента.
+    [HttpGet("{id:guid}/tickets")]
+    public async Task<IActionResult> GetTickets(Guid id, CancellationToken cancellationToken)
+    {
+        var tickets = await _tickets.GetByClientAsync(id, cancellationToken);
+        return Ok(tickets);
+    }
+
+    /// Создание клиента 
+    [HttpPost]
+    public async Task<IActionResult> Create(
+        [FromBody] CreateClientCommand command,
+        CancellationToken cancellationToken)
+    {
+        await _createValidator.ValidateAndThrowAsync(command, cancellationToken);
+
+        var client = await _clients.CreateAsync(command, cancellationToken);
+
+        // 201 Created + заголовок Location с адресом созданного ресурса.
+        // nameof вместо строки: при переименовании метода компилятор поправит.
+        return CreatedAtAction(nameof(GetById), new { id = client.Id }, client);
+    }
+
+    // Обновление клиента   
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update(
+        Guid id,
+        [FromBody] UpdateClientCommand command,
+        CancellationToken cancellationToken)
+    {
+        await _updateValidator.ValidateAndThrowAsync(command, cancellationToken);
+
+        var client = await _clients.UpdateAsync(id, command, cancellationToken);
+
+        return Ok(client);
     }
 }

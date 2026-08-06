@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "pThJ9WkhxRs=",
+  "dgSpecHash": "ZOR9OXC10Pg=",
   "success": true,
   "projectFilePath": "/Users/igor/Desktop/Gym-WebService/backend/src/GymManager.Api/GymManager.Api.csproj",
   "expectedPackageFiles": [
+    "/Users/igor/.nuget/packages/fluentvalidation/12.1.1/fluentvalidation.12.1.1.nupkg.sha512",
+    "/Users/igor/.nuget/packages/fluentvalidation.dependencyinjectionextensions/12.1.1/fluentvalidation.dependencyinjectionextensions.12.1.1.nupkg.sha512",
     "/Users/igor/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/igor/.nuget/packages/microsoft.aspnetcore.openapi/10.0.10/microsoft.aspnetcore.openapi.10.0.10.nupkg.sha512",
     "/Users/igor/.nuget/packages/microsoft.build.framework/18.0.2/microsoft.build.framework.18.0.2.nupkg.sha512",
