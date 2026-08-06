@@ -104,4 +104,64 @@ public sealed class TicketRepository : ITicketRepository
             visit.UserId,
             ticket.VisitsLimit is null ? null : ticket.VisitsLimit - ticket.VisitsUsed);
     }
+
+    public Task<TicketTypeModel?> GetTypeAsync(Guid ticketTypeId, CancellationToken cancellationToken)
+    => _db.TicketTypes
+        .AsNoTracking()
+        .Where(t => t.Id == ticketTypeId && t.IsActive)
+        .Select(t => new TicketTypeModel(t.Id, t.Code, t.Name, t.DurationDays, t.DefaultVisits))
+        .FirstOrDefaultAsync(cancellationToken);
+
+    public Task<TicketState?> GetStateAsync(Guid ticketId, CancellationToken cancellationToken)
+        => _db.Tickets
+            .AsNoTracking()
+            .Where(t => t.Id == ticketId)
+            .Select(t => new TicketState(
+                t.Id, t.ClientId, t.DateStart, t.DateEnd,
+                t.VisitsLimit, t.VisitsUsed, t.IsCancelled))
+            .FirstOrDefaultAsync(cancellationToken);
+
+    public async Task<TicketModel> AddAsync(
+    Guid clientId, Guid ticketTypeId, DateOnly dateStart, DateOnly dateEnd,
+    int? visitsLimit, CancellationToken cancellationToken)
+    {
+        var entity = new Ticket
+        {
+            ClientId = clientId,
+            TicketTypeId = ticketTypeId,
+            DateStart = dateStart,
+            DateEnd = dateEnd,
+            VisitsLimit = visitsLimit
+        };
+
+        _db.Tickets.Add(entity);
+        await _db.SaveChangesAsync(cancellationToken);
+
+        return await ReadAsync(entity.Id, cancellationToken);
+    }
+
+    public async Task<TicketModel> ExtendAsync(
+        Guid ticketId, int days, CancellationToken cancellationToken)
+        {
+            var entity = await _db.Tickets.FirstAsync(t => t.Id == ticketId, cancellationToken);
+
+            entity.DateEnd = entity.DateEnd.AddDays(days);
+
+            await _db.SaveChangesAsync(cancellationToken);
+
+            return await ReadAsync(ticketId, cancellationToken);
+        }
+
+    /// Перечитывает абонемент из представления, чтобы вернуть его
+    /// с ВЫЧИСЛЕННЫМ статусом. Считать статус в C# нельзя — это привело бы
+    /// ко второму определению одного правила.
+    private async Task<TicketModel> ReadAsync(Guid ticketId, CancellationToken cancellationToken)
+        => await _db.VTickets
+            .AsNoTracking()
+            .Where(t => t.Id == ticketId)
+            .Select(t => new TicketModel(
+                t.Id!.Value, t.ClientId!.Value, t.TicketTypeName!,
+                t.DateStart!.Value, t.DateEnd!.Value,
+                t.VisitsLimit, t.VisitsUsed!.Value, t.VisitsRemaining, t.Status!))
+            .FirstAsync(cancellationToken);
 }
